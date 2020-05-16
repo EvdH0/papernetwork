@@ -5,8 +5,8 @@ paper-network
     :target: https://pypi.python.org/pypi/paper-network
     :alt: Latest PyPI version
 
-.. image:: https://travis-ci.com/github/EvdH0/paper-network.png
-   :target: https://travis-ci.com/github/EvdH0/paper-network
+.. image:: https://travis-ci.com/EvdH0/paper-network.png
+   :target: https://travis-ci.com/EvdH0/paper-network
    :alt: Latest Travis CI build status
 
 Collect and analyze scientific literature from Semantic Scholar
