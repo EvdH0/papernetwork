@@ -25,6 +25,8 @@ Compatibility
 
 Licence
 -------
+The MIT License (MIT)
+
 
 Authors
 -------
