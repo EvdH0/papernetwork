@@ -1,11 +1,12 @@
 paper-network
 =============
 
+
 .. image:: https://img.shields.io/pypi/v/papernetwork.svg
     :target: https://pypi.python.org/pypi/papernetwork
     :alt: Latest PyPI version
 
-.. image:: https://travis-ci.com/EvdH0/papernetwork.png
+.. image:: https://travis-ci.com/EvdH0/papernetwork.svg?token=Fxxpxvyc3NhNSDqPmztx&branch=master
    :target: https://travis-ci.com/EvdH0/papernetwork
    :alt: Latest Travis CI build status
 
