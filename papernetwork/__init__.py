@@ -3,3 +3,5 @@
 __version__ = '0.1.0'
 __author__ = 'Eric van der Helm <i@iric.nl>'
 __all__ = []
+
+#from .papernetwork import PaperNetwork, Paper, PaperList

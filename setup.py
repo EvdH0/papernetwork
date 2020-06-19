@@ -14,9 +14,9 @@ def read(filename):
 
 
 setup(
-    name="paper-network",
+    name="papernetwork",
     version="0.1.0",
-    url="https://github.com/EvdH0/paper-network",
+    url="https://github.com/EvdH0/papernetwork",
     license='MIT',
 
     author="Eric van der Helm",
@@ -32,9 +32,6 @@ setup(
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
