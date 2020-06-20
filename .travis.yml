@@ -16,7 +16,8 @@ deploy:
   username: "__token__"
   password: $PYPI_PASSWORD #Added pypi token to environment on travis-ci
   edge: true # opt in to dpl v2
-  server:  https://test.pypi.org/legacy/
+  #server:  https://test.pypi.org/legacy/ #Test server of PyPi
+  server:  https://upload.pypi.org/legacy/
   skip_existing: true #see https://docs.travis-ci.com/user/deployment/pypi/#upload-artifacts-only-once
   on:
     tags: true
