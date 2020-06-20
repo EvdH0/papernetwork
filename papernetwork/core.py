@@ -85,7 +85,6 @@ class Paper(MutableMapping):
             print('Could not download page')
             return False
         else:
-            #print('downloaded successfully')
             return f
 
     def validate_json(self, json_data):
@@ -257,21 +256,13 @@ class PaperNetwork(object):
 
         self._previous_collection = PaperList([])
         self._previous_graph = nx.DiGraph()
-
-        #print('initializing a new PaperNetwork')
         
         if doi_list:
             self.collection.load_from_semantic_scholar(doi_list)
 
         if filename_list:
             self.collection.load_from_file(filename_list)
-            
-
-        #path = 'test_files'
-        #for fname in glob.glob(path):
-        #    print (fname)
-        #    self.collection.append(Paper(fname))
-    
+        
 
     @property
     def graph(self):
@@ -286,13 +277,9 @@ class PaperNetwork(object):
         """
 
         if self.collection != self._previous_collection:
-            # print ("\tNew: " +  str(id(self.collection)) + " __ old:" + str(id(self._previous_collection)))
-            # print ("\tNew: " +  str(hash(self.collection)) + " __ old:" + str(hash(self._previous_collection)))
-            # print ("\tNew: " +  str((self.collection)) + " __ old:" + str((self._previous_collection)))
-            # warnings.warn("The collection changed, have to recalculate the graph from the collection. This might overwrite any changes made to the graph.")           
 
             self._previous_collection = copy.deepcopy(self.collection)
-            # self._previous_collection = PaperList(self.collection) #We need a deepcopy as above to track changes in the PaperList
+            # self._previous_collection = PaperList(self.collection) #We need a deepcopy as above to track changes in the PaperList, this does not work
 
             self._graph = nx.DiGraph()  # Start with an empty graph again
             self._parse_papers()
@@ -405,7 +392,7 @@ class PaperNetwork(object):
 
 
         data = json_graph.node_link_data(self.graph, attrs={'id':'id', 'source': 'source', 'target': 'target', 'key': 'key'})
-        #print (data)
+        
         return data
 
     def __str__(self):

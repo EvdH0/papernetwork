@@ -6,7 +6,7 @@ import pytest
 import json
 #import papernetwork
 
-from papernetwork.papernetwork import PaperNetwork, Paper, PaperList
+from papernetwork.core import PaperNetwork, Paper, PaperList
 
 import copy
 
@@ -268,7 +268,7 @@ def test_init_fail_both():
     with pytest.raises(Exception) as execinfo:
         Paper(filename='foo', doi='bar')
     assert str(execinfo.value) == 'Cannot use both filename and doi to retreive paper'
-    
+
 def test_load_url_fail():
     Paper().load_url('https://jsonplaceholder.typicode.com/todos/1')
     
