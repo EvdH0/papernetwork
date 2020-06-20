@@ -67,6 +67,7 @@ A more elaborate example can be found in the `examples directory <examples/simpl
 More detailed usage can be found in the `test directory <tests/test_papernetwork.py>`_ as well.
 
 Run using::
+
     python -m examples.simple_example
 
 Installation
