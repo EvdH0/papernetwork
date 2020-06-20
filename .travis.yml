@@ -12,7 +12,8 @@ script:
 
 deploy:
   provider: pypi
-  username: evdh
+  #username: evdh
+  username: "__token__"
   password: $PYPI_PASSWORD
   edge: true # opt in to dpl v2
   server:  https://test.pypi.org/legacy/
