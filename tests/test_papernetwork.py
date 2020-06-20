@@ -21,7 +21,7 @@ def test_load_from_file():
     assert my_paper['title'] == "Rapid MinION profiling of preterm microbiota and antimicrobial-resistant pathogens"
 
 def test_load_from_file_two():
-    my_paper =  Paper(filename='tests/test_files/paper-a.json')
+    my_paper = Paper(filename='tests/test_files/paper-a.json')
     assert my_paper['title'] == "title - a"
     assert my_paper['year'] == "2000"
     assert len(my_paper['references']) == 2
@@ -35,7 +35,7 @@ def test_load_url_ok():
 
 def test_load_url_fail():
     data = Paper().load_url('http://www.dnacoil.com/doesntwork')
-    assert data==False
+    assert data is False
 
 def test_append_wrong_type():
     with pytest.raises(Exception) as execinfo:
@@ -61,7 +61,7 @@ def test_append_not_unique():
     my_network.collection.append(my_paper)
     with pytest.raises(ValueError, match=r"This paperId is already present, only unique paperIds allowed"):
         my_network.collection.append(my_paper_duplicate)
-        print (my_network.collection)
+        #print (my_network.collection)
 
 def test_paper_equal():
     my_paper1 = Paper(filename='tests/test_files/paper-a.json')
@@ -120,14 +120,13 @@ def test_copy():
     my_network = PaperNetwork()
 
     with pytest.raises(TypeError, match=r"JSON argument needs to be a Paper or dict"):
-        my_network._copy_paper_attributes_to_graph('foo node','a string not a dict or paper')
-
+        my_network._copy_paper_attributes_to_graph('foo node', 'a string not a dict or paper')
 
     with pytest.raises(ValueError, match=r"The node is not part of the graph, add the node first"):
-        my_network._copy_paper_attributes_to_graph('foo node',{})
+        my_network._copy_paper_attributes_to_graph('foo node', {})
 
     with pytest.raises(TypeError, match=r"Node identifier needs to be a string, such as the paperId"):
-        my_network._copy_paper_attributes_to_graph(2,{})
+        my_network._copy_paper_attributes_to_graph(2, {})
 
 
 def test_paper_parse():
@@ -181,7 +180,7 @@ def test_paper_list_two():
 
     listA[0]['new key'] = 'makes listA and listB not the same'
 
-    assert listA != listB 
+    assert listA != listB
 
     #not_a_paper_list = []
     #with pytest.raises(TypeError, match=r"Node identifier needs to be a string, such as the paperId"):
@@ -199,7 +198,7 @@ def test_paper_parse_two():
     #my_network.parse_papers()
 
     assert my_network.graph.size() == 6
-    assert len(my_network.graph.nodes()) == 6 #-> ['title - x', 'title - a', 'title - y', 'title - b', 'title - c', 'title - k']
+    assert len(my_network.graph.nodes()) == 6  #-> ['title - x', 'title - a', 'title - y', 'title - b', 'title - c', 'title - k']
     assert my_network.graph.nodes['a']['year'] == "2000"
     assert my_network.graph.nodes['b']['year'] == "1990"
     assert my_network.graph.nodes['x']['year'] == "2003"
@@ -217,14 +216,11 @@ def test_paper_parse_two():
     assert my_network.graph.nodes[my_network.collection[0]['paperId']]['year'] == my_network.collection[0]['year'] # Test that the deepcopy of the Paperlist is functioning
     assert my_network.graph.size() == 4
 
-"""
 
 def test_load_from_semantic_scholar_wrong_doi():
     with pytest.raises(Exception) as execinfo:
         data = Paper().load_from_semantic_scholar('doidoesnotexcist')
     assert str(execinfo.value) == 'Download failed'
-
-
 
 # While devving keep this live connection to s_s out
 def test_load_from_semantic_scholar():
@@ -234,8 +230,6 @@ def test_load_from_semantic_scholar():
 
     data2 = Paper(doi='10.1093/nar/gkw1328')
     assert data2['title']=='Rapid resistome mapping using nanopore sequencing'
-"""
-    
 
 def test_paper_json():
     my_paper = Paper(filename='tests/test_files/paper-a.json')
@@ -251,7 +245,7 @@ def test_paper_json():
     assert my_network.calculate_json(mimimum_citation_count_of_references=1) == {'directed': True, 'multigraph': False, 'graph': {}, 'nodes': [{'title': 'title - a', 'year': '2000', 'url': [], 'authors': [], 'venue': [], 'warning': ['Serious warning: reference list seems very short (<10)', 'Note: seems like not widely cited (<5)'], 'in_degree': 2, 'corpus': 1, 'out_degree': 0, 'id': 'a'}, {'title': 'title - x', 'year': '2003', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 1, 'corpus': 5, 'out_degree': 1, 'id': 'x'}, {'title': 'title - y', 'year': '2011', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 0, 'corpus': 5, 'out_degree': 1, 'id': 'y'}, {'title': 'title - b', 'year': '1990', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 1, 'corpus': 0, 'out_degree': 0, 'id': 'b'}, {'title': 'title - c', 'year': '1991', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 2, 'corpus': 0, 'out_degree': 0, 'id': 'c'}, {'title': 'title - k', 'year': '2005', 'url': [], 'authors': [], 'venue': [], 'warning': ['Serious warning: reference list seems very short (<10)', 'Note: seems like not widely cited (<5)'], 'in_degree': 0, 'corpus': 1, 'out_degree': 0, 'id': 'k'}], 'links': [{'source': 'a', 'target': 'b'}, {'source': 'a', 'target': 'c'}, {'source': 'x', 'target': 'a'}, {'source': 'y', 'target': 'a'}, {'source': 'k', 'target': 'x'}, {'source': 'k', 'target': 'c'}]}
     assert my_network.calculate_json(mimimum_citation_count_of_references=1, minimum_times_citing_collection=1) == {'directed': True, 'multigraph': False, 'graph': {}, 'nodes': [{'title': 'title - a', 'year': '2000', 'url': [], 'authors': [], 'venue': [], 'warning': ['Serious warning: reference list seems very short (<10)', 'Note: seems like not widely cited (<5)'], 'in_degree': 2, 'corpus': 1, 'out_degree': 0, 'id': 'a'}, {'title': 'title - x', 'year': '2003', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 1, 'corpus': 5, 'out_degree': 1, 'id': 'x'}, {'title': 'title - y', 'year': '2011', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 0, 'corpus': 5, 'out_degree': 1, 'id': 'y'}, {'title': 'title - b', 'year': '1990', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 1, 'corpus': 0, 'out_degree': 0, 'id': 'b'}, {'title': 'title - c', 'year': '1991', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 2, 'corpus': 0, 'out_degree': 0, 'id': 'c'}, {'title': 'title - k', 'year': '2005', 'url': [], 'authors': [], 'venue': [], 'warning': ['Serious warning: reference list seems very short (<10)', 'Note: seems like not widely cited (<5)'], 'in_degree': 0, 'corpus': 1, 'out_degree': 0, 'id': 'k'}], 'links': [{'source': 'a', 'target': 'b'}, {'source': 'a', 'target': 'c'}, {'source': 'x', 'target': 'a'}, {'source': 'y', 'target': 'a'}, {'source': 'k', 'target': 'x'}, {'source': 'k', 'target': 'c'}]}
     assert my_network.calculate_json(minimum_times_citing_collection=1) == {'directed': True, 'multigraph': False, 'graph': {}, 'nodes': [{'title': 'title - a', 'year': '2000', 'url': [], 'authors': [], 'venue': [], 'warning': ['Serious warning: reference list seems very short (<10)', 'Note: seems like not widely cited (<5)'], 'in_degree': 2, 'corpus': 1, 'out_degree': 0, 'id': 'a'}, {'title': 'title - x', 'year': '2003', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 1, 'corpus': 5, 'out_degree': 1, 'id': 'x'}, {'title': 'title - y', 'year': '2011', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 0, 'corpus': 5, 'out_degree': 1, 'id': 'y'}, {'title': 'title - b', 'year': '1990', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 1, 'corpus': 0, 'out_degree': 0, 'id': 'b'}, {'title': 'title - c', 'year': '1991', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 2, 'corpus': 0, 'out_degree': 0, 'id': 'c'}, {'title': 'title - k', 'year': '2005', 'url': [], 'authors': [], 'venue': [], 'warning': ['Serious warning: reference list seems very short (<10)', 'Note: seems like not widely cited (<5)'], 'in_degree': 0, 'corpus': 1, 'out_degree': 0, 'id': 'k'}], 'links': [{'source': 'a', 'target': 'b'}, {'source': 'a', 'target': 'c'}, {'source': 'x', 'target': 'a'}, {'source': 'y', 'target': 'a'}, {'source': 'k', 'target': 'x'}, {'source': 'k', 'target': 'c'}]}
-    
+
     # with restrictions
     assert my_network.calculate_json(mimimum_citation_count_of_references=2) == {'directed': True, 'multigraph': False, 'graph': {}, 'nodes': [{'title': 'title - a', 'year': '2000', 'url': [], 'authors': [], 'venue': [], 'warning': ['Serious warning: reference list seems very short (<10)', 'Note: seems like not widely cited (<5)'], 'in_degree': 2, 'corpus': 1, 'out_degree': 0, 'id': 'a'}, {'title': 'title - x', 'year': '2003', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 1, 'corpus': 5, 'out_degree': 1, 'id': 'x'}, {'title': 'title - y', 'year': '2011', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 0, 'corpus': 5, 'out_degree': 1, 'id': 'y'}, {'title': 'title - c', 'year': '1991', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 2, 'corpus': 0, 'out_degree': 0, 'id': 'c'}, {'title': 'title - k', 'year': '2005', 'url': [], 'authors': [], 'venue': [], 'warning': ['Serious warning: reference list seems very short (<10)', 'Note: seems like not widely cited (<5)'], 'in_degree': 0, 'corpus': 1, 'out_degree': 0, 'id': 'k'}], 'links': [{'source': 'a', 'target': 'c'}, {'source': 'x', 'target': 'a'}, {'source': 'y', 'target': 'a'}, {'source': 'k', 'target': 'x'}, {'source': 'k', 'target': 'c'}]}
     assert my_network.calculate_json(minimum_times_citing_collection=2) == {'directed': True, 'multigraph': False, 'graph': {}, 'nodes': [{'title': 'title - a', 'year': '2000', 'url': [], 'authors': [], 'venue': [], 'warning': ['Serious warning: reference list seems very short (<10)', 'Note: seems like not widely cited (<5)'], 'in_degree': 2, 'corpus': 1, 'out_degree': 0, 'id': 'a'}, {'title': 'title - x', 'year': '2003', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 1, 'corpus': 5, 'out_degree': 1, 'id': 'x'}, {'title': 'title - c', 'year': '1991', 'url': [], 'authors': [], 'venue': [], 'warning': [], 'in_degree': 2, 'corpus': 0, 'out_degree': 0, 'id': 'c'}, {'title': 'title - k', 'year': '2005', 'url': [], 'authors': [], 'venue': [], 'warning': ['Serious warning: reference list seems very short (<10)', 'Note: seems like not widely cited (<5)'], 'in_degree': 0, 'corpus': 1, 'out_degree': 0, 'id': 'k'}], 'links': [{'source': 'a', 'target': 'c'}, {'source': 'x', 'target': 'a'}, {'source': 'k', 'target': 'x'}, {'source': 'k', 'target': 'c'}]}
@@ -266,17 +260,15 @@ def test_pn_init():
     assert len(my_network.collection) == 2
 
 # Turns of while devving
-#    list_of_dois = ['10.1093/nar/gkw1328']
-#    my_network = PaperNetwork(filename_list=list_of_jsons, doi_list=list_of_dois)
-#    assert len(my_network.collection) == 3
+    list_of_dois = ['10.1093/nar/gkw1328']
+    my_network = PaperNetwork(filename_list=list_of_jsons, doi_list=list_of_dois)
+    assert len(my_network.collection) == 3
 
 def test_init_fail_both():
     with pytest.raises(Exception) as execinfo:
         Paper(filename='foo', doi='bar')
     assert str(execinfo.value) == 'Cannot use both filename and doi to retreive paper'
-
-
-
-#def test_load_url_fail():
-    #Paper().load_url('https://jsonplaceholder.typicode.com/todos/1')
+    
+def test_load_url_fail():
+    Paper().load_url('https://jsonplaceholder.typicode.com/todos/1')
     

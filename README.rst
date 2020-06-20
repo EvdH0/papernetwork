@@ -1,4 +1,4 @@
-paper-network
+papernetwork
 =============
 
 
@@ -13,10 +13,13 @@ paper-network
 Collect and analyze scientific literature from Semantic Scholar
 
 Examples
------
+--------
 
-	list_of_dois = ['10.1093/nar/gkw1328']
-	my_network = PaperNetwork(doi_list=list_of_dois)
+Basic example of loading data from `Semantic Scholar <https://www.semanticscholar.org/>`_ via the `API <https://api.semanticscholar.org/>`_, be sure to read the `dataset license agreement <https://api.semanticscholar.org/corpus/legal/>`_::
+
+    from papernetwork.papernetwork import PaperNetwork, Paper, PaperList
+    list_of_dois = ['10.1093/nar/gkw1328']
+    my_network = PaperNetwork(doi_list=list_of_dois)
 
 
 Installation
@@ -28,10 +31,11 @@ environment <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_)::
 
     pip install papernetwork
 
-Or from source:
-	git clone --recursive https://github.com/evdh0/papernetwork.git
-	cd papernetwork
-	python setup.py install
+Or from source::
+
+    git clone --recursive https://github.com/evdh0/papernetwork.git
+    cd papernetwork
+    python setup.py install
 
 
 

@@ -85,7 +85,7 @@ class Paper(MutableMapping):
             print('Could not download page')
             return False
         else:
-            print('downloaded successfully')
+            #print('downloaded successfully')
             return f
 
     def validate_json(self, json_data):
@@ -110,7 +110,7 @@ class Paper(MutableMapping):
         if not self.validate_json(json_data):
             raise ValueError("Not passing validation on JSON file")
 
-        self.mapping =json_data
+        self.mapping = json_data
 
     def load_from_file(self, fname):
         f = open(fname, 'r')
@@ -189,7 +189,7 @@ class PaperList(MutableSequence):
 
         :param filename_list:  list of strings containing the path to the json files
 
-        TODO: implement pathtype https://docs.python.org/3/library/pathlib.html#module-pathlib 
+        TODO: implement pathtype https://docs.python.org/3/library/pathlib.html#module-pathlib
         """
         if type(filename_list) is not list:
             raise TypeError("the filename_list must be a list of strings")
@@ -212,7 +212,7 @@ class PaperList(MutableSequence):
 
         # if not isinstance(other, PaperList):
         #    TypeError('object to compare needs to be a PaperList')
-        if len(self)!= len(other):
+        if len(self) != len(other):
             return False
 
         for idx, element in enumerate(self):
@@ -224,12 +224,12 @@ class PaperList(MutableSequence):
     def titles(self):
         """ returns a list of title strings. ie ['title - a', 'title - b']"""
         return [paper['title'] for paper in self._list]
-    
+
     @property
     def paperIds(self):
         """ returns a list of paperId strings. ie ['a', 'b']"""
         return [paper['paperId'] for paper in self._list]
-    
+
 
 class PaperNetwork(object):
     """
@@ -240,16 +240,16 @@ class PaperNetwork(object):
 
 
     """
-    
+
     # Defines which attributes from the paper instance to copy over into the NetworkX graph
     ATTRIBUTE_LIST = ['title', 'year', 'url', 'authors', 'venue', 'warning']
 
     def __init__(self, doi_list=None, filename_list=None):
         """
-        
+
         :param doi_list: list of DOIs, elements in string format. Will be fetched from semantic scholar directly
         :param filename_list: list of filenames, elements in string format. 
-        
+
         """
 
         self.collection = PaperList([])
@@ -275,7 +275,7 @@ class PaperNetwork(object):
 
     @property
     def graph(self):
-        """ 
+        """
         A NetworkX DiGraph containing the paper network.
 
         The graph is recalculated when the collection is changed.
@@ -338,11 +338,9 @@ class PaperNetwork(object):
                 self._copy_paper_attributes_to_graph(this_reference['paperId'], this_reference)
 
             if len(this_paper['references']) < 10:
-                #print ('Serious warning: reference list seems very short (<10)')
                 self._graph.nodes[this_paper['paperId']]['warning'].append('Serious warning: reference list seems very short (<10)')
 
             if len(this_paper['citations']) < 10:
-                #print ('Note: seems like not widely cited (<5)')
                 self._graph.nodes[this_paper['paperId']]['warning'].append('Note: seems like not widely cited (<5)')
 
     def calculate_json(self, mimimum_citation_count_of_references=1, minimum_times_citing_collection=1):
@@ -350,7 +348,7 @@ class PaperNetwork(object):
 
         Returns a json representation of the graph
         :param mimimum_citation_count_reference: how often is a reference paper cited by the collection? All reference papers are at least cited once (otherwise they would not be in the graph). A number higher than 1 will thus reduce the number of nodes reported back.  Defined as >= not > (default = 1)
-        :param minimum_times_citing_collection: how often is a paper citing papers in the collection? A number higher than 1 will thus reduce the number of nodes reported back. Defined as >= not > (default = 1) 
+        :param minimum_times_citing_collection: how often is a paper citing papers in the collection? A number higher than 1 will thus reduce the number of nodes reported back. Defined as >= not > (default = 1)
 
         Returns a JSON representation of the graph containing 'nodes' and 'links'. The JSON can be read, for example, by D3.
 
@@ -363,11 +361,7 @@ class PaperNetwork(object):
         COLLECTION_PAPER = 1
 
 
-        paper_type = {} # contains a numerical representation of the paper type
-        #id_dict = {}
-        #citesize = {}
-        #counter = 0
-        #pre_dict = {}
+        paper_type = {}  # contains a numerical representation of the paper type
 
         times_citing_collection = {}
 
@@ -411,8 +405,8 @@ class PaperNetwork(object):
 
 
         data = json_graph.node_link_data(self.graph, attrs={'id':'id', 'source': 'source', 'target': 'target', 'key': 'key'})
-        print (data)
+        #print (data)
         return data
 
-    def __str__(self):        
+    def __str__(self):
         return ', '.join([str(paper['title']) for paper in self.collection])
