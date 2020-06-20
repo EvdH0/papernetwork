@@ -18,3 +18,5 @@ deploy:
   edge: true # opt in to dpl v2
   server:  https://test.pypi.org/legacy/
   skip_existing: true #see https://docs.travis-ci.com/user/deployment/pypi/#upload-artifacts-only-once
+  on:
+    tags: true

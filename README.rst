@@ -12,17 +12,28 @@ paper-network
 
 Collect and analyze scientific literature from Semantic Scholar
 
-Usage
+Examples
 -----
+
+	list_of_dois = ['10.1093/nar/gkw1328']
+	my_network = PaperNetwork(doi_list=list_of_dois)
+
 
 Installation
 ------------
+Use pip to `install papernetwork from
+PyPI <https://pypi.python.org/pypi/papernetwork>`_ (recommend doing this
+inside a `virtual
+environment <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_)::
 
-Requirements
-^^^^^^^^^^^^
+    pip install papernetwork
 
-Compatibility
--------------
+Or from source:
+	git clone --recursive https://github.com/evdh0/papernetwork.git
+	cd papernetwork
+	python setup.py install
+
+
 
 Licence
 -------
@@ -32,4 +43,4 @@ The MIT License (MIT)
 Authors
 -------
 
-`paper-network` was written by `Eric van der Helm <i@iric.nl>`_.
+`papernetwork` was written by `Eric van der Helm <i@iric.nl>`_.
