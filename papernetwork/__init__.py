@@ -4,5 +4,5 @@ __version__ = '0.1.0'
 __author__ = 'Eric van der Helm <i@iric.nl>'
 __all__ = []
 
-#import core
+#import papernetwork.core
 #from .papernetwork import PaperNetwork, Paper, PaperList

@@ -4,7 +4,6 @@
 
 import pytest
 import json
-#import papernetwork
 
 from papernetwork.core import PaperNetwork, Paper, PaperList
 

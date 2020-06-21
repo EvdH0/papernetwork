@@ -17,7 +17,7 @@ Examples
 
 Basic example of loading data from `Semantic Scholar <https://www.semanticscholar.org/>`_ via the `API <https://api.semanticscholar.org/>`_, be sure to read the `dataset license agreement <https://api.semanticscholar.org/corpus/legal/>`_::
 
-    from papernetwork.core import PaperNetwork, Paper, PaperList
+    from papernetwork import PaperNetwork, Paper, PaperList
 
     # Define a list of DOI's you would like to download
     list_of_dois = ['10.1093/nar/gkw1328', '10.1128/CMR.00016-17', '10.1038/s41564-019-0626-z']
@@ -69,6 +69,7 @@ More detailed usage can be found in the `test directory <tests/test_papernetwork
 Run using::
 
     python -m examples.simple_example
+
 
 Installation
 ------------

@@ -25,9 +25,17 @@ setup(
     description="Collect and analyze scientific literature from Semantic Scholar",
     long_description=read("README.rst"),
 
-    packages=find_packages(exclude=('tests',)),
+    packages=find_packages(exclude=('tests', 'examples')),
 
-    install_requires=[],
+    install_requires=[
+        "networkx>=2.4",
+        "requests>=2.23.0",
+        "urllib3>=1.25.9"
+
+    ],
+    tests_require=[
+        "pytest",
+    ],
 
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
